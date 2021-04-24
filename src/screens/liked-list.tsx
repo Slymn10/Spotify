@@ -152,10 +152,6 @@ const LikedList = () => {
     }).start();
   }
 
-  useEffect(() => {
-    playAnimation();
-  }, []);
-
   function playAnimation() {
     let anim11 = Animated.timing(val1, {
       useNativeDriver: false,
