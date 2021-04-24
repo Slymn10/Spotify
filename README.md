@@ -1,3 +1,1 @@
 # Spotify
-
-![](spotify.gif)
