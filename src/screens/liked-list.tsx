@@ -11,12 +11,16 @@ import {
   SafeAreaView,
   Dimensions,
   Animated,
-  Easing,
+  Button,
+  Modal,
+  Alert,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Sound from 'react-native-sound';
+
+const testArrayDefault = ['red', 'green', 'yellow', 'purple'];
 
 const data = [
   {
@@ -63,6 +67,9 @@ const LikedList = () => {
   const [songs, setSongs] = useState(data);
   const [playingIndex, setPlayingIndex] = useState(0);
   const [playingSong, setPlayingSong] = useState<any>(data[0]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [testArray, setTestArray] = useState(testArrayDefault);
+
   let yValue = useRef(new Animated.Value(Dimensions.get('screen').height))
     .current;
   let val1 = useRef(new Animated.Value(30)).current;
@@ -221,7 +228,7 @@ const LikedList = () => {
             <TextInput
               keyboardAppearance={'dark'}
               returnKeyType={'search'}
-              placeholder={'Beğenilen şarkılarda bul'}
+              placeholder={'Search'}
               placeholderTextColor={'white'}
               selectionColor={'white'}
               autoCapitalize={'none'}
@@ -241,12 +248,12 @@ const LikedList = () => {
               borderRadius: 7,
               backgroundColor: 'rgba(0,0,0, 0.15)',
             }}>
-            <Text style={{color: 'white'}}>Filtreler</Text>
+            <Text style={{color: 'white'}}>Filter</Text>
           </TouchableOpacity>
         </View>
 
         <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold'}}>
-          Beğenilen Şarkılar
+          Liked Songs
         </Text>
 
         <TouchableOpacity
@@ -264,7 +271,7 @@ const LikedList = () => {
             backgroundColor: '#1DB954',
           }}>
           <Text style={{color: 'white', fontSize: 17, fontWeight: 'bold'}}>
-            KARIŞIK ÇAL
+            Shuffle Play
           </Text>
         </TouchableOpacity>
 
@@ -280,7 +287,7 @@ const LikedList = () => {
             borderWidth: 1,
           }}>
           <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>
-            ŞARKI EKLE
+            Add Songs
           </Text>
         </TouchableOpacity>
 
@@ -290,7 +297,7 @@ const LikedList = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{color: 'white', fontSize: 20}}>İndir</Text>
+          <Text style={{color: 'white', fontSize: 20}}>Download</Text>
           <Switch
             ios_backgroundColor="#3e3e3e"
             value={isEnabled}
@@ -472,7 +479,7 @@ const LikedList = () => {
               />
             </TouchableOpacity>
 
-            <Text style={{color: 'white'}}>Beğenilen Şarkılar</Text>
+            <Text style={{color: 'white'}}>Liked Songs</Text>
 
             <MaterialCommunityIcons
               color={'white'}
